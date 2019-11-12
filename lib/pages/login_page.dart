@@ -333,7 +333,7 @@ class _LoginPageState extends State {
             new SizedBox(
               height: ScreenUtil().setHeight(60),
             ),
-            thirdLoginArea,
+//            thirdLoginArea,
             new SizedBox(
               height: ScreenUtil().setHeight(60),
             ),

@@ -18,7 +18,6 @@ class HomePage extends StatefulWidget {
   _HomePageState createState() => _HomePageState();
 }
 
-
 class _HomePageState extends State<HomePage> {
   List<Widget> _list = [
     InkWell(
@@ -36,66 +35,12 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
     ),
-    Column(
-      children: <Widget>[
-        Image.asset(
-          "images/parking_condition.png",
-          height: 60,
-          width: 60,
-        ),
-        Text('监控2')
-      ],
-    ),
-    Column(
-      children: <Widget>[
-        Image.asset(
-          "images/parking_condition.png",
-          height: 60,
-          width: 60,
-        ),
-        Text('监控3')
-      ],
-    ),
-    Column(
-      children: <Widget>[
-        Image.asset(
-          "images/parking_condition.png",
-          height: 60,
-          width: 60,
-        ),
-        Text('监控4')
-      ],
-    ),
-    Column(
-      children: <Widget>[
-        Image.asset(
-          "images/parking_condition.png",
-          height: 60,
-          width: 60,
-        ),
-        Text('监控5')
-      ],
-    ),
-    Column(
-      children: <Widget>[
-        Image.asset(
-          "images/parking_condition.png",
-          height: 60,
-          width: 60,
-        ),
-        Text('监控6')
-      ],
-    ),
-    Column(
-      children: <Widget>[
-        Image.asset(
-          "images/parking_condition.png",
-          height: 60,
-          width: 60,
-        ),
-        Text('监控7')
-      ],
-    ),
+    ItemWidget(asset: "images/parking_condition.png",name: "监控2",),
+    ItemWidget(asset: "images/parking_condition.png",name: "监控3",),
+    ItemWidget(asset: "images/parking_condition.png",name: "监控4",),
+    ItemWidget(asset: "images/parking_condition.png",name: "监控5",),
+    ItemWidget(asset: "images/parking_condition.png",name: "监控6",),
+    ItemWidget(asset: "images/parking_condition.png",name: "监控7",),
   ];
   EasyRefreshController _controller = EasyRefreshController();
   int _count = 10;
@@ -122,7 +67,8 @@ class _HomePageState extends State<HomePage> {
             IconButton(
               icon: Icon(Icons.message),
               onPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => SelectPicPage()));
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => SelectPicPage()));
               },
             )
           ],
@@ -184,7 +130,10 @@ class _HomePageState extends State<HomePage> {
                           child: InkWell(
                             child: Center(child: Text('$name $index')),
                             onTap: () async {
-                              Navigator.push(context, MaterialPageRoute(builder: (context) => DetailPage()));
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => DetailPage()));
                             },
                           ));
                     },
@@ -209,5 +158,28 @@ class _HomePageState extends State<HomePage> {
             });
           },
         ));
+  }
+}
+
+
+// ignore: must_be_immutable
+class ItemWidget extends StatelessWidget {
+  String asset;
+  String name;
+
+  ItemWidget({Key key, this.asset, this.name}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: <Widget>[
+        Image.asset(
+          asset,
+          height: 60,
+          width: 60,
+        ),
+        Text(name)
+      ],
+    );
   }
 }

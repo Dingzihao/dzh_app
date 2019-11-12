@@ -4,6 +4,7 @@ import 'package:cookie_jar/cookie_jar.dart';
 import 'package:dio/dio.dart';
 import 'package:dzh_app/config/sputil.dart';
 import 'package:dzh_app/http/token_interceptor.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class HttpUtil {
   static HttpUtil instance;
@@ -11,6 +12,7 @@ class HttpUtil {
   BaseOptions options;
 
   CancelToken cancelToken = new CancelToken();
+  String token = "";
 
   static HttpUtil getInstance() {
     if (null == instance) instance = new HttpUtil();
@@ -28,9 +30,9 @@ class HttpUtil {
       receiveTimeout: 5000,
 
       //Http请求头.
-      headers: {
-//        "Cookie":"auto-token="+token
-      },
+//      headers: {
+//        "Cookie":token
+//      },
       //请求的Content-Type，默认值是[ContentType.json]. 也可以用ContentType.parse("application/x-www-form-urlencoded")
       contentType: ContentType.json,
       //表示期望以那种格式(方式)接受响应数据。接受4种类型 `json`, `stream`, `plain`, `bytes`. 默认值是 `json`,
@@ -45,6 +47,11 @@ class HttpUtil {
     //添加拦截器
     dio.interceptors
         .add(InterceptorsWrapper(onRequest: (RequestOptions options) {
+      if (null != options.headers.values && options.headers.values.length > 0) {
+        String s = options.headers.values.toList()[0];
+        token = s.substring(0, s.indexOf(";"));
+      }
+      options.headers = {"Cookie": token};
       print("请求之前--------${options.headers}");
       return options;
     }, onResponse: (Response response) {
@@ -64,9 +71,8 @@ class HttpUtil {
     try {
       response = await dio.get(url,
           queryParameters: data, options: options, cancelToken: cancelToken);
-      print('get success---------${response.statusCode}');
-      print('get success---------${response.data}');
-
+      print('${response.statusCode}');
+      print('${response.data}');
     } on DioError catch (e) {
       print('get url---------$url');
       print('get error---------$e');
@@ -83,9 +89,8 @@ class HttpUtil {
     try {
       response = await dio.post(url,
           queryParameters: data, options: options, cancelToken: cancelToken);
-      print('post success---------${response.data}');
       print('post success2---------${response.headers}');
-
+      print('post success---------${response.data}');
     } on DioError catch (e) {
       print('post error---------$e');
       formatError(e);
@@ -128,6 +133,7 @@ class HttpUtil {
     } else if (e.type == DioErrorType.RESPONSE) {
       // When the server response, but with a incorrect status, such as 404, 503...
       print("出现异常");
+      Fluttertoast.showToast(msg: e.response.data.toString());
     } else if (e.type == DioErrorType.CANCEL) {
       // When the request is cancelled, dio will throw a error with this type.
       print("请求取消");
