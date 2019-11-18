@@ -20,7 +20,6 @@ class _DetailPageState extends State<DetailPage> {
           child: Text('EventBus更新首页列表'),
           onPressed: () {
             eventBus.fire(UserLoggedInEvent('DZH'));
-            eventBus.destroy();
             Navigator.pop(context);
           },
         ),

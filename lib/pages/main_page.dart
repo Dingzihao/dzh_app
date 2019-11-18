@@ -1,6 +1,9 @@
-import 'package:dzh_app/pages/home_page.dart';
-import 'package:dzh_app/pages/profile_page.dart';
+
 import 'package:flutter/material.dart';
+
+import 'goods_page.dart';
+import 'profile_page.dart';
+import 'home_page.dart';
 
 class MainPage extends StatefulWidget {
   @override
@@ -11,6 +14,7 @@ class _MainPageState extends State<MainPage> {
   int _currentIndex = 0;
   List<StatefulWidget> pageList = [
     HomePage(),
+    GoodsPage(),
     ProfilePage(),
   ];
 
@@ -20,6 +24,7 @@ class _MainPageState extends State<MainPage> {
       bottomNavigationBar: BottomNavigationBar(
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(title: Text('首页'), icon: Icon(Icons.home)),
+          BottomNavigationBarItem(title: Text('商品'), icon: Icon(Icons.shopping_cart)),
           BottomNavigationBarItem(title: Text('我的'), icon: Icon(Icons.person)),
         ],
         currentIndex: _currentIndex,

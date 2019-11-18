@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 class TabPage extends StatefulWidget {
@@ -24,6 +26,7 @@ class _TabPageState extends State<TabPage> with AutomaticKeepAliveClientMixin {
       floatingActionButton: FloatingActionButton(
         onPressed: _addCount,
         tooltip: '点击相加',
+        heroTag: Random.secure().nextInt(100),
         child: Icon(
           Icons.add,
           color: Colors.white,

@@ -44,14 +44,14 @@ class _HomePageState extends State<HomePage> {
   ];
   EasyRefreshController _controller = EasyRefreshController();
   int _count = 10;
-  String name = "默认";
+  String _name = "默认";
 
   @override
   void initState() {
     super.initState();
     eventBus.on<UserLoggedInEvent>().listen((event) {
       setState(() {
-        name = event.user;
+        _name = event.user;
       });
     });
   }
@@ -128,7 +128,7 @@ class _HomePageState extends State<HomePage> {
                               borderRadius: BorderRadius.circular(5)),
                           color: Colors.lightBlue[100 * (index % 9)],
                           child: InkWell(
-                            child: Center(child: Text('$name $index')),
+                            child: Center(child: Text('$_name $index')),
                             onTap: () async {
                               Navigator.push(
                                   context,
