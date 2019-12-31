@@ -1,6 +1,8 @@
 # dzh_app
 
-A new Flutter application.
+Flutter常用组件的使用Grid、List、底部导航、顶部tab切换等；
+常见插件的使用：下拉刷新上拉加载，图片选择，轮播图，eventBus等；
+网络请求Dio的基础封装，flutter_screenutil、Toast、shared_preferences第三方库的使用等
 
 ## Getting Started
 

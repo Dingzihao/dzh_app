@@ -2,8 +2,6 @@ import 'dart:io';
 
 import 'package:cookie_jar/cookie_jar.dart';
 import 'package:dio/dio.dart';
-import 'package:dzh_app/config/sputil.dart';
-import 'package:dzh_app/http/token_interceptor.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 class HttpUtil {
@@ -55,7 +53,9 @@ class HttpUtil {
       print("请求之前--------${options.headers}");
       return options;
     }, onResponse: (Response response) {
-      print('响应之前');
+          //可在此保存token
+      print('响应之前----${response.headers}');
+      print('响应之前----${response.data}');
       return response;
     }, onError: (DioError e) {
       print("错误之前");

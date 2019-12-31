@@ -1,7 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:dzh_app/config/sputil.dart';
 import 'package:dzh_app/config/strings.dart';
-import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 /**
@@ -10,7 +9,6 @@ import 'package:fluttertoast/fluttertoast.dart';
  * on 2019/3/23.
  */
 class TokenInterceptors extends InterceptorsWrapper {
-
   String _token;
 
   @override
@@ -26,9 +24,8 @@ class TokenInterceptors extends InterceptorsWrapper {
     return options;
   }
 
-
   @override
-  onResponse(Response response) async{
+  onResponse(Response response) async {
     try {
       var responseJson = response.data;
       if (response.statusCode == 201 && responseJson["auto-toke"] != null) {
